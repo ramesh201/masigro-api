@@ -1,0 +1,27 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "\"masigro API used for NIBM 19.1 Web API course work\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramesh201/masigro-api.git"
+  },
+  "keywords": [
+    "masigro",
+    "Web API",
+    "19.1"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramesh201/masigro-api/issues"
+  },
+  "homepage": "https://github.com/ramesh201/masigro-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
