@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/ramesh201/masigro-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "add": "^2.0.6",
+    "auth0-js": "^9.13.4",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.0",
+    "yarn": "^1.22.4"
   }
 }
