@@ -1,26 +1,79 @@
 //alert("Hello masigro!!!")
-
+var newUrl = null;
 const express = require('express');
 const mongoose = require('mongoose');
-/*const cors = require('cors');*/
+const cors = require('cors');
 const products = require('./routes/products');
 const home = require('./routes/home');
 const orders = require('./routes/orders');
 const customers = require('./routes/customers');
 const randomtokengenerator = require('./middlewares/randomtokengenerator');
+const urlpathlowercasemaker = require('./middlewares/urlpathlowercasemaker');
 /*const mailer = require('./middlewares/emailjob');*/
+const Product = require("./models/product");
 const app = express();
 const PORT = 4000;
 
-//app.use(cors());
+
+app.use(cors());
 app.use(express.json());
+
+/*app.use(function(req, res, next) {
+    //console.log('Called URL:', req.url);
+    req.url = req.url.toLowerCase();
+    newUrl = req;
+    next();
+  });*/
+
+  
+
 /*app.use(authenticator);
 app.use(mailer);*/
 app.use(randomtokengenerator);
+app.use(urlpathlowercasemaker);
+//console.log(app.use(urlpathlowercasemaker));
 app.use('/api/products', products);
 app.use('/', home);
 app.use('/api/orders', orders);
 app.use('/api/customers', customers);
+
+
+app.get('/api/products/:categoryName', async (newUrl, res, next) => { //function(newUrl, res, next) {
+    //res.send('Hey there... '+newUrl.url);
+console.log("LowerCase - "+newUrl.params.categoryName);
+try{
+    let products = null;
+    
+    if(typeof(newUrl.params.categoryName) == "undefined"){
+        console.log("undi");
+        products = await Product.find();
+    }
+    else{
+        console.log("not - undi");
+        products = await Product.find({
+        categoryName: newUrl.params.categoryName,
+      });
+    }
+      console.log(products);
+      if (!products) {
+        //product = [];
+        console.log("empty");
+        return res.send({
+          status: 400,
+          products: [],
+          message: "The given Id does not exist on our server",
+        }); //res.status(404).send("The given Id does not exist on our server");
+      }
+      //console.log(products);
+      //res.sendStatus(200).send(product);
+      res.send({ status: res.statusCode, products, message: "products" });
+
+    } catch (e) {
+        return res.send({ status: 500, products: {}, message: e.message }); //res.status(500).send(e.message);
+      }
+
+  });
+
 
 mongoose
     .connect("mongodb://localhost/masigrodb", { useNewUrlParser: true, useUnifiedTopology: true })

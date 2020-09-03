@@ -2,12 +2,25 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    name: {
+    customerToken: {
         type : String,
         minlength : 4,
         maxlength : 20,
         required : true
-    }
+    },
+    orderArr: {
+        type: Array,
+        default: [{}]
+    },
+orderDate: {
+    type: String,
+    default: ""
+},
+isCompleted: {
+    type: Boolean,
+    default: false
+}
+
     /*
     name: {
         type : String,

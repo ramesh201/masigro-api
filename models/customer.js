@@ -1,10 +1,34 @@
 const mongoose = require('mongoose');
 
 const customerSchema = new mongoose.Schema({
-    name: {
+    customerToken: {
         type : String,
-        minlength : 4,
-        maxlength : 20,
+        minlength : 2,
+        maxlength : 100,
+        required : true
+    },
+    customerFirstName: {
+        type : String,
+        minlength : 2,
+        maxlength : 100,
+        required : true
+    },
+    customerLastName: {
+        type : String,
+        minlength : 2,
+        maxlength : 100,
+        required : true
+    },
+    customerEmail: {
+        type : String,
+        minlength : 2,
+        maxlength : 100,
+        required : true
+    },
+    customerAddress: {
+        type : String,
+        minlength : 10,
+        maxlength : 100,
         required : true
     }
     /*
