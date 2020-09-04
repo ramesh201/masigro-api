@@ -7,6 +7,8 @@ const products = require('./routes/products');
 const home = require('./routes/home');
 const orders = require('./routes/orders');
 const customers = require('./routes/customers');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 const randomtokengenerator = require('./middlewares/randomtokengenerator');
 const urlpathlowercasemaker = require('./middlewares/urlpathlowercasemaker');
 /*const mailer = require('./middlewares/emailjob');*/
@@ -36,6 +38,8 @@ app.use('/api/products', products);
 app.use('/', home);
 app.use('/api/orders', orders);
 app.use('/api/customers', customers);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 
 app.get('/api/products/:categoryName', async (newUrl, res, next) => { //function(newUrl, res, next) {
