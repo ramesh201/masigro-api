@@ -14,7 +14,7 @@ const urlpathlowercasemaker = require('./middlewares/urlpathlowercasemaker');
 /*const mailer = require('./middlewares/emailjob');*/
 const Product = require("./models/product");
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 
 app.use(cors());
@@ -78,9 +78,10 @@ try{
 
   });
 
-
+//mongodb+srv://user:user123@cluster0.ur7jd.mongodb.net/masigrodb?retryWrites=true&w=majority
+//mongodb://localhost/masigrodb
 mongoose
-    .connect("mongodb://localhost/masigrodb", { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect("mongodb+srv://user:user123@cluster0.ur7jd.mongodb.net/masigrodb?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to Masigro Db successfully ... "))
     .catch(err => console.log("Ërror has occured while connecting to db : ", err));
 
