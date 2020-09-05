@@ -15,7 +15,7 @@ let productsArray = [
 
 router.get("/", async (req, res) => {//(req, res) => {
   let products = await Product.find();
-  res.send({ status: res.statusCode, products, message: "hiiiii" });
+  res.send({ status: res.statusCode, products, message: "" });
   //res.sendStatus(200).send(heroes);
 });
 /*router.get("/Products", async (req, res) => {//(req, res) => {

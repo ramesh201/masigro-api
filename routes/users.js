@@ -24,7 +24,7 @@ if(isExisting == null){
 
     user = await user.save();
 
-    return res.send({status:200,users:{
+    return res.send({status:res.statusCode,users:{
         userFirstName: req.body.userFirstName,
         userLastName: req.body.userLastName,
         username: user.username,

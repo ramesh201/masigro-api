@@ -31,7 +31,7 @@ app.use(express.json());
 
 /*app.use(authenticator);
 app.use(mailer);*/
-app.use(randomtokengenerator);
+//app.use(randomtokengenerator);
 app.use(urlpathlowercasemaker);
 //console.log(app.use(urlpathlowercasemaker));
 app.use('/api/products', products);

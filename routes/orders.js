@@ -59,7 +59,7 @@ router.post("/", async (req, res) => {
       res.send({
         status: res.statusCode,
         orders: { orderTOBeAddedToDb },
-        message: "ghncfgh",
+        message: "",
       });
     } catch (e) {
       return res.send({ status: 500, orders: {}, message: e.message }); //res.status(500).send(e.message);
