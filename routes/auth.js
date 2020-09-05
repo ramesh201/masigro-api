@@ -8,16 +8,16 @@ const SECRET_KEY = "123456";
 
 router.post("/",async (req,res) => {
 try {
-    let user = await User.findOne({ customerEmail: req.body.CustomerEmail });
-    console.log(req.body.customerEmail);
-    if (!user) return res.status(400).send("Invalid email");
+    let userObj = await User.findOne({ userEmail: req.body.userEmail });
+    console.log(req.body.userEmail);
+    if (!userObj) return res.status(400).send("Invalid User email / password");
 
-    let pwValid = await bcrypt.compare(req.body.customerPassword,user.customerPassword);
-    if (!pwValid) return res.status(400).send("Invalid email / password");
+    let passwordValid = await bcrypt.compare(req.body.userPassword,userObj.userPassword);
+    if (!passwordValid) return res.status(400).send("Invalid User email / password");
 
-    let token = jwt.sign({id: user._id, cusEmail: user.customerEmail},SECRET_KEY);
+    let token = jwt.sign({id: userObj._id, cusEmail: userObj.userEmail},SECRET_KEY);
 
-    res.send({token: token});
+    res.send({userEmail: userObj.userEmail,username: userObj.username,token: token});
 
 } catch (error) {
     res.status(500).send(error.message);
