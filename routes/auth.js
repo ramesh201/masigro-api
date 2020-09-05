@@ -15,13 +15,15 @@ try {
     let passwordValid = await bcrypt.compare(req.body.userPassword,userObj.userPassword);
     if (!passwordValid) return res.status(400).send("Invalid User email / password");
 
-    let token = jwt.sign({id: userObj._id, cusEmail: userObj.userEmail},SECRET_KEY);
+    let token = jwt.sign({id: userObj._id, userFirstName: userObj.userFirstName,userLastName:userObj.userLastName,userEmail: userObj.userEmail,username: userObj.username,roles: userObj.userRoles},SECRET_KEY);
 
-    res.send({userEmail: userObj.userEmail,username: userObj.username,token: token});
+    res.send({userFirstName: userObj.userFirstName,userLastName:userObj.userLastName,userEmail: userObj.userEmail,username: userObj.username,roles: userObj.userRoles,token: token});
 
 } catch (error) {
     res.status(500).send(error.message);
 }
 });
+
+
 
 module.exports = router;

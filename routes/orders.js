@@ -1,8 +1,10 @@
 
 const express = require('express');
 const Order = require('../models/order');
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 
+const SECRET_KEY = "123456";
 
 router.get('/',async (req, res) => {
    
@@ -30,6 +32,20 @@ router.get('/:customerToken',async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+
+    const userToken = req.header("x-jwt-token");
+    if(!userToken) return res.status(401).send("Access denied. No token");
+
+    try {
+        jwt.verify(userToken,SECRET_KEY);
+        console.log(userToken);
+    } catch (error) {
+        res.status(400).send("invalid token");
+    }
+
+    var decode = jwt.decode(userToken,SECRET_KEY);
+    console.log("decoded Obj: " +JSON.stringify(decode));
+
     /*if (!req.body.customerToken) {
       return res.send({
         status: 400,
