@@ -9,7 +9,7 @@ const SECRET_KEY = "123456";
 
 router.post("/", async (req, res) => {
 
-    const userToken = req.header("x-jwt-token");
+    /*const userToken = req.header("x-jwt-token");
     if(!userToken) return res.status(401).send("Access denied. No token");
 
     try {
@@ -20,12 +20,14 @@ router.post("/", async (req, res) => {
     }
 
     console.log("userToken");
+    */
+
   try {
     const saltRounds = await bcrypt.genSalt(10);
     let encryptedHashPassword = await bcrypt.hash(req.body.userPassword,saltRounds);
 
     let isExisting = await User.findOne({ userEmail: req.body.userEmail });
-//console.log(isExisting);
+console.log("exist: "+isExisting);
 if(isExisting == null){
     let user = new User({
         userFirstName: req.body.userFirstName,
