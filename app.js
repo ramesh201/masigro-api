@@ -78,8 +78,8 @@ try{
 
   });
 
-//var dbUrl = mongodb+srv://user:user123@cluster0.ur7jd.mongodb.net/masigrodb?retryWrites=true&w=majority
-var dbUrl = "mongodb://localhost/masigrodb"
+var dbUrl = "mongodb+srv://user:user123@cluster0.ur7jd.mongodb.net/masigrodb?retryWrites=true&w=majority";
+//var dbUrl = "mongodb://localhost/masigrodb"
 mongoose
     .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to Masigro Db successfully ... "))
