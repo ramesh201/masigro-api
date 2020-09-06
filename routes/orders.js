@@ -33,9 +33,10 @@ router.get('/:customerToken',async (req, res) => {
 
 router.post("/", async (req, res) => {
 
-    const userToken = req.header("x-jwt-token");
+    /*const userToken = req.header("x-jwt-token");
+    console.log("usertoken selected");
     if(!userToken) return res.status(401).send("Access denied. No token");
-
+    console.log("usertoken empty");
     try {
         jwt.verify(userToken,SECRET_KEY);
         console.log(userToken);
@@ -45,7 +46,7 @@ router.post("/", async (req, res) => {
 
     var decode = jwt.decode(userToken,SECRET_KEY);
     console.log("decoded Obj: " +JSON.stringify(decode));
-
+*/
     /*if (!req.body.customerToken) {
       return res.send({
         status: 400,
@@ -53,7 +54,7 @@ router.post("/", async (req, res) => {
         message: "No customerToken have been set!",
       }); //res.status(400).send("Not all mandatory values have been set!");
     }*/
-
+console.log("finished auth");
     if (!req.body.orderDate) {
         return res.send({
           status: 400,
