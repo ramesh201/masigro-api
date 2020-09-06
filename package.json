@@ -16,7 +16,7 @@
     "Web API",
     "19.1"
   ],
-  "engines":{
+  "engines": {
     "node": "12.18.3"
   },
   "author": "",
