@@ -9,6 +9,7 @@ const orders = require('./routes/orders');
 const customers = require('./routes/customers');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const currency = require('./routes/external_api/Currency');
 const randomtokengenerator = require('./middlewares/randomtokengenerator');
 const urlpathlowercasemaker = require('./middlewares/urlpathlowercasemaker');
 /*const mailer = require('./middlewares/emailjob');*/
@@ -27,7 +28,7 @@ app.use(express.json());
     next();
   });*/
 
-  
+
 
 /*app.use(authenticator);
 app.use(mailer);*/
@@ -40,51 +41,52 @@ app.use('/api/orders', orders);
 app.use('/api/customers', customers);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/currency', currency);
 
 
 app.get('/api/products/:categoryName', async (newUrl, res, next) => { //function(newUrl, res, next) {
-    //res.send('Hey there... '+newUrl.url);
-console.log("LowerCase - "+newUrl.params.categoryName);
-try{
+  //res.send('Hey there... '+newUrl.url);
+  console.log("LowerCase - " + newUrl.params.categoryName);
+  try {
     let products = null;
-    
-    if(typeof(newUrl.params.categoryName) == "undefined"){
-        console.log("undi");
-        products = await Product.find();
+
+    if (typeof (newUrl.params.categoryName) == "undefined") {
+      console.log("undi");
+      products = await Product.find();
     }
-    else{
-        console.log("not - undi");
-        products = await Product.find({
+    else {
+      console.log("not - undi");
+      products = await Product.find({
         categoryName: newUrl.params.categoryName,
       });
     }
-      console.log(products);
-      if (!products) {
-        //product = [];
-        console.log("empty");
-        return res.send({
-          status: 400,
-          products: [],
-          message: "This category id not on our Masigro API",
-        }); //res.status(404).send("The given Id does not exist on our server");
-      }
-      //console.log(products);
-      //res.sendStatus(200).send(product);
-      res.send({ status: res.statusCode, products, message: "products" });
+    console.log(products);
+    if (!products) {
+      //product = [];
+      console.log("empty");
+      return res.send({
+        status: 400,
+        products: [],
+        message: "This category id not on our Masigro API",
+      }); //res.status(404).send("The given Id does not exist on our server");
+    }
+    //console.log(products);
+    //res.sendStatus(200).send(product);
+    res.send({ status: res.statusCode, products, message: "products" });
 
-    } catch (e) {
-        return res.send({ status: 500, products: {}, message: e.message }); //res.status(500).send(e.message);
-      }
+  } catch (e) {
+    return res.send({ status: 500, products: {}, message: e.message }); //res.status(500).send(e.message);
+  }
 
-  });
+});
 
 //var dbUrl = "mongodb+srv://user:user123@cluster0.ur7jd.mongodb.net/masigrodb?retryWrites=true&w=majority";
 var dbUrl = "mongodb://localhost/masigrodb"
 mongoose
-    .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("Connected to Masigro Db successfully ... "))
-    .catch(err => console.log("Ërror has occured while connecting to db : ", err));
+  .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to Masigro Db successfully ... "))
+  .catch(err => console.log("Ërror has occured while connecting to db : ", err));
 
 app.listen(PORT, function () {
-    console.log("Masigro - Listening on Port - " + PORT);
+  console.log("Masigro - Listening on Port - " + PORT);
 });

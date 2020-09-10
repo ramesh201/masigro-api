@@ -48,44 +48,30 @@ router.put("/:orderId", async (req, res) => {
 });
 
 async function orderPost(req, res) {
-  /*const userToken = req.header("x-jwt-token");
-  console.log("usertoken selected");
-  if(!userToken) return res.status(401).send("Access denied. No token");
-  console.log("usertoken empty");
-  try {
-      jwt.verify(userToken,SECRET_KEY);
-      console.log(userToken);
-  } catch (error) {
-      res.status(400).send("invalid token");
-  }
-
-  var decode = jwt.decode(userToken,SECRET_KEY);
-  console.log("decoded Obj: " +JSON.stringify(decode));
-*/
-  /*if (!req.body.customerToken) {
-    return res.send({
-      status: 400,
-      orders: {},
-      message: "No customerToken have been set!",
-    }); //res.status(400).send("Not all mandatory values have been set!");
-  }*/
-  // console.log("finished auth");
-
   let order;
 
-  if (req.body.customerToken) {
-    order = await getIncompleteOrderByCustomerToken(req.body.customerToken);
-
-    if (order != null) {
-      order.orderArr = Array.prototype.push(order.orderArr, req.body.orderArr);
-
-      return res.send({
+  if (!req.body.customerToken) {
+    return req.send.status(400).send(
+      {
         status: res.statusCode,
-        data: { "order": order },
-        message: "Order already available!"
-      });
-    }
+        message: "Customer Token Mandetory"
+      }
+    );
   }
+
+  order = await getIncompleteOrderByCustomerToken(req.body.customerToken);
+
+  if (order != null) {
+    // order.orderArr = Array.prototype.push(order.orderArr, req.body.orderArr);
+    // order.save();
+
+    return res.send({
+      status: res.statusCode,
+      data: { "order": order },
+      message: "Order already available!"
+    });
+  }
+
 
   try {
     order = new Order({
