@@ -2,21 +2,16 @@ const express = require("express");
 const Product = require("../models/product");
 const router = express.Router();
 const urlpathlowercasemaker = require("../middlewares/urlpathlowercasemaker");
-var xxx = router.use(urlpathlowercasemaker);
+var pathLowercase = router.use(urlpathlowercasemaker);
 //console.log(xxx);
 //const app = express();
-let productsArray = [
-  {
-    id: 1,
-    name: "Captain America",
-  },
-];
+
 //app.use('/api/products',router);
 
-router.get("/", async (req, res) => {//(req, res) => {
+router.get("/", async (req, res) => {
   let products = await Product.find();
   res.send({ status: res.statusCode, products, message: "" });
-  //res.sendStatus(200).send(heroes);
+  
 });
 /*router.get("/Products", async (req, res) => {//(req, res) => {
     let products = await Product.find();

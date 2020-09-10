@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const { Double } = require('bson');
 
 const productSchema = new mongoose.Schema({
     productName: {
@@ -62,39 +61,6 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-
-    /*name: {
-        type : String,
-        minlength : 4,
-        maxlength : 20,
-        required : true
-    },
-    birthName: {
-        type : String,
-        required : true
-    },
-    movies: {
-       type : [String],
-       enum : ["Infinity War","Endgame","Iron Man 2","First Avenger"]
-    },
-    likeCount: Number,
-    imgUrl: {
-        type : String,
-        default : "Placeholder Image Link to be updated here ..."
-    },
-    deceased: Boolean*/
-
-    /*
-    "productName": "MacBook Pro 13 - (2020)",
-    "price": "267000.00",
-    "categoryName":"MacBook",
-    "imgUrl": "https://www.apple.com/v/mac/home/at/images/overview/compare/macbook_pro_13__ft1pc3lqwd6y_large.jpg",
-    "RAM":"8 GB",
-    "CPU":"1.4 GHz quad core 8th gen",
-    "Storage":"256GB SSD",
-    "Display":"13 inch Retina display",
-    "Description":
-*/
 
 });
 

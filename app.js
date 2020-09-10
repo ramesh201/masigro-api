@@ -65,7 +65,7 @@ try{
         return res.send({
           status: 400,
           products: [],
-          message: "The given Id does not exist on our server",
+          message: "This category id not on our Masigro API",
         }); //res.status(404).send("The given Id does not exist on our server");
       }
       //console.log(products);

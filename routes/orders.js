@@ -23,7 +23,7 @@ router.get('/:customerToken', async (req, res) => {
     return res.send({
       status: 400,
       orders: [],
-      message: "The given Id does not exist on our server",
+      message: "This token is not on our API server",
     }); //res.status(404).send("The given Id does not exist on our server");
   }
   console.log(orders);
